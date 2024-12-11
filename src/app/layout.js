@@ -4,6 +4,8 @@ import Header from "./components/Header";
 import { ThemeProvider } from "next-themes";
 import ThemeComponent from "./components/ThemeComponent";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -22,17 +24,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider attribute="class">
-          <ThemeComponent>
-            <Header />
-            {children}
-          </ThemeComponent>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <ThemeProvider attribute="class">
+            <ThemeComponent>
+              <Header />
+              {children}
+            </ThemeComponent>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

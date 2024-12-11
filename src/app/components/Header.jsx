@@ -6,6 +6,8 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import React from "react";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { dark, light } from "@clerk/themes";
 
 function Header() {
   const path = usePathname();
@@ -42,11 +44,20 @@ function Header() {
         >
           {theme === "light" ? <FaSun /> : <FaMoon />}
         </Button>
-        <Link href="/sign-in">
-          <Button gradientDuoTone="purpleToBlue" outline>
-            Sign In
-          </Button>
-        </Link>
+        <SignedIn>
+          <UserButton
+            appearance={{
+              baseTheme: theme === "light" ? light : dark,
+            }}
+          />
+        </SignedIn>
+        <SignedOut>
+          <Link href="/sign-in">
+            <Button gradientDuoTone="purpleToBlue" outline>
+              Sign in
+            </Button>
+          </Link>
+        </SignedOut>
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
