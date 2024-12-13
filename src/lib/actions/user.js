@@ -18,7 +18,7 @@ export const createOrUpdateUser = async (
         $set: {
           firstName: first_name,
           lastName: last_name,
-          profileImage: image_url,
+          profilePicture: image_url,
           email: email_addresses[0].email_address,
           username,
         },
@@ -27,7 +27,7 @@ export const createOrUpdateUser = async (
     );
     return user;
   } catch (error) {
-    console.log("Error creating or updating user", error);
+    console.log("Error creating or updating user:", error);
   }
 };
 
@@ -36,6 +36,6 @@ export const deleteUser = async (id) => {
     await connect();
     await User.findOneAndDelete({ clerkId: id });
   } catch (error) {
-    console.log("Error deleting user", error);
+    console.log("Error deleting user:", error);
   }
 };
