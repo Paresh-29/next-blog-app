@@ -12,11 +12,11 @@ export const connect = async () => {
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "next-blog",
       useNewUrlParser: true,
-      useUnifiesTopology: true,
+      useUnifiedTopology: true,
     });
     console.log("Connected to MongoDB");
     initialized = true;
   } catch (error) {
-    console.log("Error connecting to MongoDB", error);
+    console.log("Error connecting to MongoDB:", error);
   }
 };
