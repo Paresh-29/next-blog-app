@@ -4,19 +4,21 @@ let initialized = false;
 
 export const connect = async () => {
   mongoose.set("strictQuery", true);
+
   if (initialized) {
     console.log("Already connected to MongoDB");
     return;
   }
+
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "next-blog",
       useNewUrlParser: true,
-      useUnifiedTopology: true,
+      useUnifiedTopology: true, // Corrected option name
     });
     console.log("Connected to MongoDB");
     initialized = true;
   } catch (error) {
-    console.log("Error connecting to MongoDB:", error);
+    console.log("Error connecting to MongoDB", error);
   }
 };
