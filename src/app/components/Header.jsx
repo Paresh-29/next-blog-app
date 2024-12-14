@@ -1,12 +1,12 @@
 "use client";
-import { Button, Navbar, TextInput, theme } from "flowbite-react";
+import { Button, Navbar, TextInput } from "flowbite-react";
 import Link from "next/link";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import React from "react";
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { dark, light } from "@clerk/themes";
 
 function Header() {
