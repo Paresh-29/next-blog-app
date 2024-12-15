@@ -1,5 +1,4 @@
 import {
-  auth,
   clerkMiddleware,
   createRouteMatcher,
 } from "@clerk/nextjs/server";
