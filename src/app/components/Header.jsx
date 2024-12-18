@@ -8,11 +8,32 @@ import { useTheme } from "next-themes";
 import React from "react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { dark, light } from "@clerk/themes";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 function Header() {
   const path = usePathname();
   const { theme, setTheme } = useTheme();
   console.log("Current theme:", theme);
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchParams = useSearchParams();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParmas = new URLSearchParams();
+    urlParmas.set("searchTerm", searchTerm);
+    const searchQuery = urlParmas.toString();
+    router.push(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams("searchTerm");
+    const searchTermFromurl = urlParams.get("searchTerm");
+    if (searchTermFromurl) {
+      setSearchTerm(searchTermFromurl);
+    }
+  }, [searchParams]);
   return (
     <Navbar className="border-b-2">
       <Link
@@ -24,12 +45,14 @@ function Header() {
         </span>
         Blog
       </Link>
-      <form>
+      <form onSubmit={handleSubmit}>
         <TextInput
           type="text"
           placeholder="Search..."
           rightIcon={AiOutlineSearch}
           className="hidden lg:inline"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
       </form>
       <Button className="w-12 h-10 lg:hidden" color="gray" pill>
