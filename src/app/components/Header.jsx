@@ -35,6 +35,7 @@ function Header() {
     }
   }, [searchParams]);
   return (
+    //TODO: do this or that
     <Navbar className="border-b-2">
       <Link
         href="/"
